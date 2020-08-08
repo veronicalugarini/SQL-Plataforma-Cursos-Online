@@ -5,6 +5,11 @@ Projeto de Banco de Dados Relacional (SQL) com utilização do SQL Server, SGBD 
 
 Para este sistema, desenvolvi o modelo de dados conceitual, lógico relacional e por fim, físico. Abaixo, todas as Querys necessárias para a construção do proejto, com criação de tabelas, sua população com dados e comandos projeção de dados para extração de relatórios.
 
+**Modelagem Lógica**
+
+
+![modelagem](https://user-images.githubusercontent.com/64870434/89713785-5ee74200-d970-11ea-83f3-0628a6c46709.png)
+
 **Modelo Físico**
 
 **1.** Criando o Banco de Dados
@@ -217,7 +222,7 @@ SELECT NUM_PEDIDO AS 'ID PEDIDO', COD_CLIENTE AS 'ID CLIENTE', VLR_TOTAL_PEDIDO 
 ```
 Tabela alterada: 
 
-![ALTER_VALOR](https://user-images.githubusercontent.com/64870434/89713506-79b8b700-d96e-11ea-8fd0-2773a1589437.png)
+![ALTER_VALOR](https://user-images.githubusercontent.com/64870434/89713815-90f8a400-d970-11ea-832a-4241248e7ee1.png)
 
 **10.** Atualização da coluna VLR_TOTAL_PEDIDO nos casos em que está nula ou com valor total calculado erroneamente
 ```
@@ -233,7 +238,7 @@ ON P.NUM_PEDIDO = P1.NUM_PEDIDO;
 ```
 **10.** Resultado da Query
 
-![VALOR_ALTERADO](https://user-images.githubusercontent.com/64870434/89713622-4165a880-d96f-11ea-91ee-680ef31dfdf2.png)
+![VALOR_ALTERADO](https://user-images.githubusercontent.com/64870434/89713819-9655ee80-d970-11ea-9af1-57236279f160.png)
 
 **11.** Clientes SEM CPF cadastrado
 
@@ -247,9 +252,9 @@ SELECT COD_CLIENTE AS 'ID CLIENTE', NOM_CLIENTE AS 'NOME', NUM_CPF_CNPJ AS 'CPF'
 ```
 **11.2** Verificando alteração
 
-![cpf_null](https://user-images.githubusercontent.com/64870434/89713426-fa2ae800-d96d-11ea-90e0-411eb0c2bd6c.png)
+![cpf_null](https://user-images.githubusercontent.com/64870434/89713823-9ce46600-d970-11ea-9235-65c367fe91e7.png)
 
-**11.3** Relatório de clientes SEM CPF
+**11.3** Relatório com número de clientes SEM CPF
 ```
 SELECT CAST(COUNT (COALESCE (NUM_CPF_CNPJ,0)) AS numeric) AS 'CLIENTES SEM CPF'
 FROM CLIENTE 
