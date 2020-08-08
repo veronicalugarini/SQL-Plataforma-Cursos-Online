@@ -249,7 +249,7 @@ SELECT COD_CLIENTE AS 'ID CLIENTE', NOM_CLIENTE AS 'NOME', NUM_CPF_CNPJ AS 'CPF'
 
 ![cpf_null](https://user-images.githubusercontent.com/64870434/89713426-fa2ae800-d96d-11ea-90e0-411eb0c2bd6c.png)
 
-**11.3** Relatório de clientes SEM CPF no Banco
+**11.3** Relatório de clientes SEM CPF
 ```
 SELECT CAST(COUNT (COALESCE (NUM_CPF_CNPJ,0)) AS numeric) AS 'CLIENTES SEM CPF'
 FROM CLIENTE 
