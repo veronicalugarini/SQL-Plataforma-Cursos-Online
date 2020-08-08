@@ -255,3 +255,5 @@ SELECT CAST(COUNT (COALESCE (NUM_CPF_CNPJ,0)) AS numeric) AS 'CLIENTES SEM CPF'
 FROM CLIENTE 
 WHERE NUM_CPF_CNPJ IS NULL;
 ```
+
+![clientes_sem_cpf](https://user-images.githubusercontent.com/64870434/89713653-8d185200-d96f-11ea-93b3-d30f6b072805.png)
