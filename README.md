@@ -213,22 +213,11 @@ WHERE VLR_TOTAL_PEDIDO = 100.00;
 ```
 (3 linha(s) afetadas)
 ```
-SELECT NUM_PEDIDO, COD_CLIENTE, VLR_TOTAL_PEDIDO, COD_FORMA_PAGAMENTO FROM PEDIDO;
+SELECT NUM_PEDIDO AS 'ID PEDIDO', COD_CLIENTE AS 'ID CLIENTE', VLR_TOTAL_PEDIDO AS 'VALOR TOTAL', COD_FORMA_PAGAMENTO AS 'FORMA DE PAGAMENTO' FROM PEDIDO;
 ```
 Tabela alterada: 
-```
-NUM_PEDIDO     COD_CLIENTE     VLR_TOTAL_PEDIDO   COD_FORMA_PAGAMENTO
-100	           11              200.00	            1
-101	           12              250.00	            1
-102	           13	             600.00		          2
-103	           14	             150.00	 	          1
-104	           15	          	 800.00		          1
-105	           16		             0.00		          2
-106	           17		           300.00		          1	
-107	           11		           500.00		          2
-108	           11		             0.00		          1
-109	           16		             0.00		          1
-```
+
+![ALTER_VALOR](https://user-images.githubusercontent.com/64870434/89713506-79b8b700-d96e-11ea-8fd0-2773a1589437.png)
 
 **10.** Atualização da coluna VLR_TOTAL_PEDIDO nos casos em que está nula ou com valor total calculado erroneamente
 ```
@@ -241,24 +230,11 @@ ON P.NUM_PEDIDO = I.NUM_PEDIDO
 GROUP BY P.NUM_PEDIDO, P.VLR_TOTAL_PEDIDO
 HAVING P.VLR_TOTAL_PEDIDO != SUM(I.VLR_TOTAL_ITEM) OR P.VLR_TOTAL_PEDIDO IS NULL) P1
 ON P.NUM_PEDIDO = P1.NUM_PEDIDO;
-
-SELECT NUM_PEDIDO AS 'ID PEDIDO', COD_CLIENTE AS 'ID CLIENTE', VLR_TOTAL_PEDIDO AS 'VALOR TOTAL', COD_FORMA_PAGAMENTO AS 'FORMA DE PAGAMENTO' FROM PEDIDO;
-GO (--verificando correção)
 ```
 **10.** Resultado da Query
-```
-ID PEDIDO 	ID CLIENTE	VALOR TOTAL	 FORMA DE PAGAMENTO
-100		      11	        200.00		   1
-101	      	12		      250.00		   1
-102		      13          600.00	     2
-103		      14          150.00 	     1
-104		      15		      800.00	     1
-105		      16		      100.00	     2
-106		      17		      300.00	     1
-107		      11		      500.00	     2
-108		      11		      100.00	     1
-109		      16		      100.00	     1
-```
+
+![VALOR_ALTERADO](https://user-images.githubusercontent.com/64870434/89713622-4165a880-d96f-11ea-91ee-680ef31dfdf2.png)
+
 **11.** Clientes SEM CPF cadastrado
 
 **11.1** Atualizando CPF para NULL, dos clientes com ID/código maior ou igual a 18
@@ -270,19 +246,9 @@ WHERE COD_CLIENTE >= 18;
 SELECT COD_CLIENTE AS 'ID CLIENTE', NOM_CLIENTE AS 'NOME', NUM_CPF_CNPJ AS 'CPF' FROM CLIENTE;
 ```
 **11.2** Verificando alteração
-```
-ID CLIENTE	NOME	            CPF
-11	        PAULA SILVEIRA	  25685412365
-12	        GUILHERME ALMEIDA	40215698752
-13	        LARA REZENDE	    45625321458
-14	        PEDRO FIRENZE	    56235674152
-15	        Clara F	          85412563974
-16	        SARA PORTO	      56485721365
-17	        HENRIQUE SILVA	  65489745632
-18	        JOSE ANTONIO	    NULL
-19	        ANA PAULA	        NULL
-20	        CARLA SILVA	      NULL
-```
+
+![cpf_null](https://user-images.githubusercontent.com/64870434/89713426-fa2ae800-d96d-11ea-90e0-411eb0c2bd6c.png)
+
 **11.3** Relatório de clientes SEM CPF no Banco
 ```
 SELECT CAST(COUNT (COALESCE (NUM_CPF_CNPJ,0)) AS numeric) AS 'CLIENTES SEM CPF'
